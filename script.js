@@ -140,20 +140,22 @@ function menu() {
 === MENU ===
 1 - Adicionar Livro
 2 - Listar Livros
-3 - Emprestar Livro
-4 - Devolver Livro
-5 - Sair            
+3 - Buscar Livro por Título ou Autor(a)
+4 - Emprestar Livro(s)
+5 - Devolver Livro(s)
+6 - Sair            
         `);
         opcao = prompt("O que deseja fazer? ");
         switch (opcao) {
             case '1': adicionarLivro(); break;
             case '2': listarLivros(); break;
-            case '3': emprestarLivro(); break;
-            case '4': devolverLivro(); break;
-            case '5': console.log("\nSaindo do programa..."); break;
+            case '3': buscarLivros(); break;
+            case '4': emprestarLivro(); break;
+            case '5': devolverLivro(); break;
+            case '6': console.log("\nSaindo do programa..."); break;
             default: console.log("\nErro: ´Por favor, escolha uma opção válida.");
         }    
-    } while (opcao !== "5");
+    } while (opcao !== "6");
 }
 
 // Inicia o programa
