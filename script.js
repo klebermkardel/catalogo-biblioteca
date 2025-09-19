@@ -18,3 +18,35 @@ Uma função devolverLivro() (muda disponivel para true).
 
 */
 
+const prompt = require('prompt-sync')();
+
+// --- BANCO DE DADOS ---
+
+let tarefas = [];
+
+// --- FUNÇÕES PRINCIPAIS ---
+
+function adicionarLivro() {
+    // ...
+}
+
+function listarLivros() {
+    // ...
+}
+
+function emprestarLivro() {
+    // ...
+}
+
+function devolverLivro() {
+    // ...
+}
+
+// --- LÓGICA PRINCIPAL ---
+
+function menu() {
+    // ...
+}
+
+// Chama função menu() para iniciar o programa
+menu();
