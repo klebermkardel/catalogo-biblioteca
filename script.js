@@ -29,9 +29,12 @@ let proximoId = 1;
 
 function adicionarLivro() {
     const tituloDigitado = prompt("Qual livro deseja adicionar? ");
-    const autorDigitado = prompt("Qual é o(a) autor(a) deste livro? ");
+    if (tituloDigitado === null) return; 
 
-    if(!tituloDigitado || !tituloDigitado.trim() || !autorDigitado || !autorDigitado.trim()) {
+    const autorDigitado = prompt("Qual é o(a) autor(a) deste livro? ");
+     if (autorDigitado === null) return;
+
+    if(!tituloDigitado.trim() || !autorDigitado.trim()) {
         console.log("\nTítulo ou autor inválidos! Tente novamente.");
         return;
     } else {
