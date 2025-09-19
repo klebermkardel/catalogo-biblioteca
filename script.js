@@ -23,11 +23,30 @@ const prompt = require('prompt-sync')();
 // --- BANCO DE DADOS ---
 
 let biblioteca = [];
+let proximoId = 1;
 
 // --- FUNÇÕES PRINCIPAIS ---
 
 function adicionarLivro() {
-    // ,,,
+    const tituloDigitado = prompt("Qual livro deseja adicionar? ");
+    const autorDigitado = prompt("Qual é o(a) autor(a) deste livro? ");
+
+    if(!tituloDigitado || !tituloDigitado.trim() || !autorDigitado || !autorDigitado.trim()) {
+        console.log("\nTítulo ou autor inválidos! Tente novamente.");
+        return;
+    } else {
+        const novoLivro = {
+            id: proximoId,
+            titulo: tituloDigitado.trim(),
+            autor: autorDigitado.trim(),
+            disponivel: true
+        };
+
+        biblioteca.push(novoLivro);
+        proximoId++;
+
+        console.log(`\n ✅ Livro "${novoLivro.titulo}" cadastrado com sucesso!`);
+    }
 }
 
 function listarLivros() {
