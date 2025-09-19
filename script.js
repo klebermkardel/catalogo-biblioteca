@@ -71,7 +71,35 @@ function listarLivros() {
 }
 
 function emprestarLivro() {
-    // ...
+    console.log("\n--- Emprestar Livro ---");
+    listarLivros();
+
+    if(biblioteca.length === 0) {
+        return;
+    }
+        
+    const idDigitado = Number(prompt("\nDigite o número (ID) do livro a ser emprestado: "));
+
+    if(isNaN(idDigitado) || !Number.isInteger(idDigitado) || idDigitado < 1) {
+        console.log("\nErro: Por favor, digite um número válido dentro das opções listadas");
+        return;
+    }
+        
+    const livroEncontrado = biblioteca.find(livro => livro.id === idDigitado);
+
+    if(!livroEncontrado) {
+        console.log("\nLivro com o ID informado não foi encontrado.");
+        return;
+    } else {
+        if(livroEncontrado.disponivel) {
+            livroEncontrado.disponivel = false;
+
+        console.log(`\nLivro emprestado com sucesso!`);
+        } else {
+            // Se não estiver disponível, informamos o usuário.
+            console.log(`\nAviso: O livro "${livroEncontrado.titulo}" já está emprestado.`);
+        }
+    }
 }
 
 function devolverLivro() {
