@@ -22,12 +22,12 @@ const prompt = require('prompt-sync')();
 
 // --- BANCO DE DADOS ---
 
-let tarefas = [];
+let biblioteca = [];
 
 // --- FUNÇÕES PRINCIPAIS ---
 
 function adicionarLivro() {
-    // ...
+    // ,,,
 }
 
 function listarLivros() {
@@ -45,8 +45,27 @@ function devolverLivro() {
 // --- LÓGICA PRINCIPAL ---
 
 function menu() {
-    // ...
+    let opcao;
+    do {
+        console.log(`
+=== MENU ===
+1 - Adicionar Livro
+2 - Listar Livros
+3 - Emprestar Livro
+4 - Devolver Livro
+5 - Sair            
+        `);
+        opcao = prompt("O que deseja fazer? ");
+        switch (opcao) {
+            case '1': adicionarLivro(); break;
+            case '2': listarLivros(); break;
+            case '3': emprestarLivro(); break;
+            case '4': devolverLivro(); break;
+            case '5': console.log("\nSaindo do programa..."); break;
+            default: console.log("\nErro: ´Por favor, escolha uma opção válida.");
+        }    
+    } while (opcao !== "5");
 }
 
-// Chama função menu() para iniciar o programa
+// Inicia o programa
 menu();
