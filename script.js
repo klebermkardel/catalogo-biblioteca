@@ -50,7 +50,21 @@ function adicionarLivro() {
 }
 
 function listarLivros() {
-    // ...
+    if(biblioteca.length === 0) {
+        console.log("\nNenhum livro encontrado.");
+    } else {
+        console.log("\n--- LISTA DE LIVROS ---");
+
+        biblioteca.forEach((livro) => {
+            const status = livro.disponivel ? "Sim" : "Não";
+
+            console.log(`
+                \n#${livro.id}
+                Livro: ${livro.titulo}
+                Autor(a): ${livro.autor}
+                Disponível: ${status}`)
+        })
+    }
 }
 
 function emprestarLivro() {
