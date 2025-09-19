@@ -70,6 +70,34 @@ function listarLivros() {
     }
 }
 
+function buscarLivros() {
+    console.log("\n--- Buscar Livros ---");
+    const termoDigitado = prompt("Digite o título ou autor(a) que deseja encontrar: ");
+    
+    if (termoDigitado === null) {
+        console.log("Busca cancelada.");
+        return;
+    }
+
+    const termoBusca = termoDigitado.trim().toLowerCase();
+    if (!termoBusca) {
+        console.log("Erro: O termo de busca não pode ser vazio.");
+        return;
+    }
+
+    const livrosEncontrados = biblioteca.filter(livro =>
+        livro.titulo.toLowerCase().includes(termoBusca) ||
+        livro.autor.toLowerCase().includes(termoBusca)
+    );
+
+    if (livrosEncontrados.length > 0) {
+        console.log(`\n--- Resultados para "${termoDigitado}" ---`);
+        console.table(livrosEncontrados);
+    } else {
+        console.log(`\nNenhum livro encontrado com o termo "${termoDigitado}".`);
+    }
+}
+
 function emprestarLivro() {
     console.log("\n--- Emprestar Livro ---");
     listarLivros();
