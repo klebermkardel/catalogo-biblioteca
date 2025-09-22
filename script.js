@@ -106,28 +106,31 @@ function emprestarLivro() {
         return;
     }
         
-    const idDigitado = Number(prompt("\nDigite o número (ID) do livro a ser emprestado: "));
+    const idsDigitados = prompt("\nDigite o(s) ID(s) do(s) livro(s) a emprestar: ");
+    if (idsDigitados === null) return;
 
-    if(isNaN(idDigitado) || !Number.isInteger(idDigitado) || idDigitado < 1) {
-        console.log("\nErro: Por favor, digite um número válido dentro das opções listadas");
+    const idsParaEmprestar = idsDigitados.split(',').map(id => Number(id.trim()));
+
+    if(idsParaEmprestar.some(isNaN)) {
+        console.log("\nErro: Por favor, digite apenas números de ID válidos, separados por vírgula.");
         return;
     }
         
-    const livroEncontrado = biblioteca.find(livro => livro.id === idDigitado);
-
-    if(!livroEncontrado) {
-        console.log("\nLivro com o ID informado não foi encontrado.");
-        return;
-    } else {
-        if(livroEncontrado.disponivel) {
-            livroEncontrado.disponivel = false;
-
-        console.log(`\nLivro emprestado com sucesso!`);
+    console.log("");
+    idsParaEmprestar.forEach(id => {
+        const livroEncontrado = biblioteca.find(livro => livro.id === id);
+        
+        if(!livroEncontrado) {
+            console.log(`- Aviso: Livro com ID ${id} não encontrado.`);
         } else {
-            // Se não estiver disponível, informamos o usuário.
-            console.log(`\nAviso: O livro "${livroEncontrado.titulo}" já está emprestado.`);
+            if(livroEncontrado.disponivel) {
+                livroEncontrado.disponivel = false;
+                console.log(`- ✅ Livro "${livroEncontrado.titulo}" (ID: ${id}) emprestado com sucesso!`);
+            } else {
+                console.log(`- Aviso: O livro "${livroEncontrado.titulo}" (ID: ${id}) já está emprestado.`);
+            }
         }
-    }
+    });
 }
 
 function devolverLivro() {
