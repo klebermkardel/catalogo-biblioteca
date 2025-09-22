@@ -134,32 +134,38 @@ function emprestarLivro() {
 }
 
 function devolverLivro() {
-    console.log("\nDevolução de Livros ---");
+    console.log("\n--- Devolver Livro(s) ---");
     listarLivros();
 
     if (biblioteca.length === 0) {
         return;
     }
 
-    const idDigitado = Number(prompt("\nDigite o número (ID) do livro a ser devolvido: "));
+    const idsDigitados = prompt("\nDigite o(s) ID(s) do(s) livro(s) a devolver (separados por vírgula): ");
+    if (idsDigitados === null) return; // Checa cancelamento
 
-    if(isNaN(idDigitado) || !Number.isInteger(idDigitado) || idDigitado < 1) {
-        console.log("\nErro: Por favor, digite um número válido dentro das opções listadas");
+    const idsParaDevolver = idsDigitados.split(',').map(id => Number(id.trim()));
+
+    if (idsParaDevolver.some(isNaN)) {
+        console.log("\nErro: Por favor, digite apenas números de ID válidos, separados por vírgula.");
         return;
     }
 
-    const livroEncontrado = biblioteca.find(livro => livro.id === idDigitado);
+    console.log("");
+    idsParaDevolver.forEach(id => {
+        const livroEncontrado = biblioteca.find(livro => livro.id === id);
 
-    if(!livroEncontrado.disponivel) {
-        console.log("\nErro: Livrocom o ID informado não foi encontrado.");
-    } else {
-        if(livroEncontrado.disponivel === false) {
-            livroEncontrado.disponivel = true;
-            console.log(`\n✅ Livro "${livroEncontrado.titulo}" devolvido com sucesso!`);
+        if (!livroEncontrado) {
+            console.log(`- Aviso: Livro com ID ${id} não encontrado no catálogo.`);
         } else {
-            console.log(`\nAviso: O livro "${livroEncontrado.titulo}" já está disponível na biblioteca.`);
+            if (!livroEncontrado.disponivel) {
+                livroEncontrado.disponivel = true;
+                console.log(`- ✅ Livro "${livroEncontrado.titulo}" (ID: ${id}) devolvido com sucesso!`);
+            } else {
+                console.log(`- Aviso: O livro "${livroEncontrado.titulo}" (ID: ${id}) já estava disponível.`);
+            }
         }
-    }
+    });
 }
 
 // --- LÓGICA PRINCIPAL ---
